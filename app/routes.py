@@ -1,9 +1,8 @@
 from app import app, db
-from app.forms import LoginForm, RegistrationForm,EditProfileForm
+from app.forms import LoginForm, RegistrationForm,EditProfileForm,CommentForm
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
-from werkzeug.urls import url_parse
+from app.models import User, Comment
 
 @app.route('/', methods=['GET', 'POST'])
 def none():
@@ -15,7 +14,9 @@ def base():
 
     login_form = LoginForm()
     registration_form = RegistrationForm()
-
+    comment_form = CommentForm()
+    comments = []
+    comments = Comment.query.order_by(Comment.timestamp.desc()).all()
     if request.method == 'POST':
         print("Form submitted via POST method")
         if 'login' in request.form :
@@ -33,7 +34,14 @@ def base():
                 else:
                     print("you are logined")
                     login_user(user)
-                    
+        elif 'comment' in request.form:
+            print("Form comment")
+            if comment_form.validate_on_submit():
+                print("Form comment IN ")
+                comment = Comment(content=request.form['comment_field'], user_id = current_user.id )  
+                db.session.add(comment)
+                db.session.commit()
+
         elif 'register' in request.form:
             print("Form REG")
             if registration_form.validate_on_submit():
@@ -55,9 +63,8 @@ def base():
                 else:
                     flash('Congratulations, you are now a registered user!')
                     app.logger.debug(f'User {username} successfully registered')
-    else:
-        print("bobka")
-    return render_template('register.html', login_form=login_form, registration_form=registration_form)
+
+    return render_template('register.html', login_form=login_form, registration_form=registration_form,comment_form=comment_form, comments=comments)
 
 @app.route('/logout')
 def logout():

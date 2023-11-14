@@ -317,21 +317,30 @@
                     {% if current_user.is_anonymous %}
                     <div class="form-label">If you wanna post your feedback, you should be authorized</div>
                     {% else %}
-                    <form action="" method="post">
+                    <form action="/base" method="post">
+                        {{ comment_form.hidden_tag() }}
                         <div class="mb-3">
                             <label for="exampleInputName1" class="form-label">Name :</label>
                             <input type="name" class="form-control" id="exampleInputName1" >
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputFeadback1" class="form-label">Your feadback :</label>
-                            <input type="text" class="form-control" id="exampleInputFeadback1">
+                            <input type="text" class="form-control" id="exampleInputFeadback1" name="comment_field">
                           </div>
-                          <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                          <button type="submit" class="btn btn-primary" id="submit" name="comment">Submit</button>
                           
                     </form>
                     {% endif %}
                     <div class="mb-2" id="feadback-field">
-                        
+                    {% for comment in comments %}
+                        <div class="coment">
+                            <p class="alert alert primary"> {{ comment.user.username }} 
+                                <a class="text-right small">
+                                    <em>{{ comment.timestamp.strftime('%d %b %Y %H:%M:%S') }}</em>
+                                </a>
+                            </p>
+                            <p class="alert alert success">{{ comment.content }}</p></div>
+                    {% endfor %}
                     </div>
                 </div>
             </div>
