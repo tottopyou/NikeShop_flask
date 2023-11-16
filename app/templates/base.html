@@ -99,17 +99,20 @@
                 <p>Що ми пропонуємо :</p>
             </div>
             <div class="content section_1">
+            {% for good in goods %}
+            {% set discounted_price = good.price * (100 - good.discount) / 100 %}
+            {% set rounded_price = ((discounted_price + 5) // 10) * 10 %}
+                {% if (good.id % 2 != 0) %}
                 <div class="proposition anim-items">
-                    <div id="fotoVapor" class="foto" >
-                        
+                    <div id="{{ good.Img_id }}" class="foto" >
                     </div>
                     <div class="about-sneakers">
-                        <h1>NIKE AIR VAPORMAX</h1>
+                        <h1>{{ good.name }}</h1>
                         <div class="cost">
                             <div class="cost-value">
-                                <div class="discount">-15%</div>
-                                <p class="f_cost">2800 ₴</p>
-                                <p class="r_cost">2399 ₴</p>
+                                <div class="discount">-{{ good.discount}}%</div>
+                                <p class="f_cost">{{ good.price }} ₴</p>
+                                <p class="r_cost">{{rounded_price|int}} ₴</p>
                             </div>
                         </div>
                         <div class="button-buy">
@@ -123,22 +126,23 @@
                             <option value="7">43</option>
                             <option value="8">44</option>
                             <option value="9">45</option>
-                          </select>
-                          <button id="1" class="buy">Купити</button>
+                            </select>
+                            <button id="{{ good.id }}" class="buy">Купити</button>
                         </div>
                         
                     </div>
                 </div>
+                {% else %}
                 <div class="revers anim-items proposition">
-                    <div id="fotoForce" class="foto">
+                    <div id="{{ good.Img_id }}" class="foto" >
                     </div>
                     <div class="about-sneakers">
-                        <h1>NIKE AIR FORCE</h1>
+                        <h1>{{ good.name }}</h1>
                         <div class="cost">
                             <div class="cost-value">
-                                <div class="discount">-17%</div>
-                                <p class="f_cost">2400 ₴</p>
-                                <p class="r_cost">1999 ₴</p>
+                                <div class="discount">-{{ good.discount}}%</div>
+                                <p class="f_cost">{{ good.price }} ₴</p>
+                                <p class="r_cost">{{rounded_price|int}} ₴</p>
                             </div>
                         </div>
                         <div class="button-buy">
@@ -152,164 +156,14 @@
                             <option value="7">43</option>
                             <option value="8">44</option>
                             <option value="9">45</option>
-                          </select>
-                          <button id="2" class="buy">Купити</button>
+                            </select>
+                            <button id="{{ good.id }}" class="buy">Купити</button>
                         </div>
                         
                     </div>
                 </div>
-                <div class="proposition anim-items">
-                    <div id="foto90" class="foto">
-                       
-                    </div>
-                    <div class="about-sneakers">
-                        <h1>Nike Air Max 90 Triple White </h1>
-                        <div class="cost">
-                            <div class="cost-value">
-                                <div class="discount">-16%</div>
-                                <p class="f_cost">2500 ₴</p>
-                                <p class="r_cost">2099 ₴</p>
-                            </div>
-                        </div>
-                        <div class="button-buy">
-                            <select class="required" required="required">
-                            <option value="1">37</option>
-                            <option value="2">38</option>
-                            <option value="3">39</option>
-                            <option value="4">40</option>
-                            <option value="5">41</option>
-                            <option value="6">42</option>
-                            <option value="7">43</option>
-                            <option value="8">44</option>
-                            <option value="9">45</option>
-                          </select>
-                          <button id="3" class="buy">Купити</button>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="proposition revers anim-items">
-                    <div id="fotoMax" class="foto" >
-                       
-                    </div>
-                    <div class="about-sneakers">
-                        <h1>Nike Air Max 270 React</h1>
-                        <div class="cost">
-                            <div class="cost-value">
-                                <div class="discount">-20%</div>
-                                <p class="f_cost">4200 ₴</p>
-                                <p class="r_cost">3399 ₴</p>
-                            </div>
-                        </div>
-                        <div class="button-buy">
-                            <select class="required" required="required">
-                            <option value="1">37</option>
-                            <option value="2">38</option>
-                            <option value="3">39</option>
-                            <option value="4">40</option>
-                            <option value="5">41</option>
-                            <option value="6">42</option>
-                            <option value="7">43</option>
-                            <option value="8">44</option>
-                            <option value="9">45</option>
-                          </select>
-                          <button id="4" class="buy">Купити</button>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="proposition anim-items">
-                    <div id="fotoM2K" class="foto" >
-                        
-                    </div>
-                    <div class="about-sneakers">
-                        <h1>Nike M2K Tekno</h1>
-                        <div class="cost">
-                            <div class="cost-value">
-                                <div class="discount">-20%</div>
-                                <p class="f_cost">4000 ₴</p>
-                                <p class="r_cost">3199 ₴</p>
-                            </div>
-                        </div>
-                        <div class="button-buy">
-                            <select class="required" required="required">
-                            <option value="1">37</option>
-                            <option value="2">38</option>
-                            <option value="3">39</option>
-                            <option value="4">40</option>
-                            <option value="5">41</option>
-                            <option value="6">42</option>
-                            <option value="7">43</option>
-                            <option value="8">44</option>
-                            <option value="9">45</option>
-                          </select>
-                          <button id="5" class="buy">Купити</button>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class=" proposition revers anim-items">
-                    <div id="fotoShox" class="foto">
-                       
-                    </div>
-                    <div class="about-sneakers">
-                        <h1>Nike Shox TL</h1>
-                        <div class="cost">
-                            <div class="cost-value">
-                                <div class="discount">-21%</div>
-                                <p class="f_cost">3800 ₴</p>
-                                <p class="r_cost">2999 ₴</p>
-                            </div>
-                        </div>
-                        <div class="button-buy">
-                            <select class="required" required="required">
-                            <option value="1">37</option>
-                            <option value="2">38</option>
-                            <option value="3">39</option>
-                            <option value="4">40</option>
-                            <option value="5">41</option>
-                            <option value="6">42</option>
-                            <option value="7">43</option>
-                            <option value="8">44</option>
-                            <option value="9">45</option>
-                          </select>
-                          <button id="6" class="buy">Купити</button>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="proposition anim-items">
-                    <div id="fotoZoom" class="foto">
-                      
-                    </div>
-                    <div class="about-sneakers">
-                        <h1>Nike Zoom 2K</h1>
-                        <div class="cost">
-                            <div class="cost-value">
-                                <div class="discount">-23%</div>
-                                <p class="f_cost">3500 ₴</p>
-                                <p class="r_cost">2699 ₴</p>
-                            </div>
-                        </div>
-                        <div class="button-buy">
-                            <select class="required" required="required">
-                            <option value="1">37</option>
-                            <option value="2">38</option>
-                            <option value="3">39</option>
-                            <option value="4">40</option>
-                            <option value="5">41</option>
-                            <option value="6">42</option>
-                            <option value="7">43</option>
-                            <option value="8">44</option>
-                            <option value="9">45</option>
-                          </select>
-                          <button id="7" class="buy">Купити</button>
-                        </div>
-                        
-                    </div>
-                </div>
-
-
+                {% endif %}
+            {% endfor %}
             </div>
             <div class="feadbacks section_2">
                 <div class="container">

@@ -2,7 +2,7 @@ from app import app, db
 from app.forms import LoginForm, RegistrationForm,EditProfileForm,CommentForm
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Comment
+from app.models import User, Comment,Good
 
 @app.route('/', methods=['GET', 'POST'])
 def none():
@@ -17,6 +17,7 @@ def base():
     comment_form = CommentForm()
     comments = []
     comments = Comment.query.order_by(Comment.timestamp.desc()).all()
+    goods = Good.query.all()
     if request.method == 'POST':
         print("Form submitted via POST method")
         if 'login' in request.form :
@@ -64,7 +65,7 @@ def base():
                     flash('Congratulations, you are now a registered user!')
                     app.logger.debug(f'User {username} successfully registered')
 
-    return render_template('register.html', login_form=login_form, registration_form=registration_form,comment_form=comment_form, comments=comments)
+    return render_template('register.html',goods=goods, login_form=login_form, registration_form=registration_form,comment_form=comment_form, comments=comments)
 
 @app.route('/logout')
 def logout():
