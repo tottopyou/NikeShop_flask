@@ -1,27 +1,32 @@
 
-// Для count в корзині + або - 
 
-let  counter_two = 1;
-
-function count_plus() {
-
-    counter_two++;
-    document.querySelector('.plus-minus').innerHTML = counter_two;
+function count_plus(event) {
+    const item = event.target.getAttribute('data-item');
+    let counter = document.querySelector(`[data-item-count="${item}"]`);
+    let countValue = parseInt(counter.innerHTML);
+    countValue++;
+    counter.innerHTML = countValue;
 }
 
-
-
-function count_minus() {
-
-    if(counter_two>1){
-        counter_two--;
-    document.querySelector('.plus-minus').innerHTML = counter_two;
+function count_minus(event) {
+    const item = event.target.getAttribute('data-item');
+    let counter = document.querySelector(`[data-item-count="${item}"]`);
+    let countValue = parseInt(counter.innerHTML);
+    if (countValue > 1) {
+        countValue--;
+        counter.innerHTML = countValue;
     }
-    
 }
 
-const  button_plus=document.getElementById("plus"),
-       button_minus=document.getElementById("minus");
+const buttons_plus = document.querySelectorAll('.plus');
+const buttons_minus = document.querySelectorAll('.minus');
 
-button_plus.addEventListener("click", count_plus);
-button_minus.addEventListener("click", count_minus);
+if (buttons_plus.length > 0 && buttons_minus.length > 0) {
+    buttons_plus.forEach(button => {
+        button.addEventListener('click', count_plus);
+    });
+
+    buttons_minus.forEach(button => {
+        button.addEventListener('click', count_minus);
+    });
+}

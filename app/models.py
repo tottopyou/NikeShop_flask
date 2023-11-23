@@ -46,8 +46,7 @@ class Good(db.Model):
 class Basket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    good_id = db.Column(db.Integer, db.ForeignKey('good.id'), nullable=False)
-    quantity = db.Column(db.Integer, default=1)        
+    good_id = db.Column(db.Integer, db.ForeignKey('good.id'), nullable=False)    
     size = db.Column(db.Integer, nullable=False)
     user = db.relationship('User', backref='baskets')
     good = db.relationship('Good', backref='baskets')

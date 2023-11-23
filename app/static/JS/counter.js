@@ -1,15 +1,12 @@
-if (!localStorage.getItem('counter')) {
-    localStorage.setItem('counter', 0);
-}
-            
+      
 function count() {
-    let counter = localStorage.getItem('counter');
-
+    let counterElement = document.querySelector(".num-st");
+    let counter = parseInt(counterElement.textContent);
+    console.log(counter)
     counter++;
-    document.querySelector('.num-st').innerHTML = counter;
-
-    localStorage.setItem('counter', counter);
+    counterElement.textContent = counter;
 }
+
 
 
 var basket=document.querySelector(".basket");
@@ -58,9 +55,6 @@ function animationBasket2()
     }
     document.querySelector(".number").style.display = 'none';
 }
-
-
-document.querySelector('.num-st').innerHTML = localStorage.getItem('counter');
 
 const button1=document.getElementById("1"),
       button2=document.getElementById("2"), 

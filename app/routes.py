@@ -1,8 +1,8 @@
 from app import app, db
 from app.forms import LoginForm, RegistrationForm,EditProfileForm,CommentForm
-from flask import render_template, flash, redirect, url_for, request
+from flask import jsonify, render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Comment,Good
+from app.models import User, Comment,Good,Basket
 
 @app.route('/', methods=['GET', 'POST'])
 def none():
@@ -18,12 +18,16 @@ def base():
     comments = []
     comments = Comment.query.order_by(Comment.timestamp.desc()).all()
     goods = Good.query.all()
+    if current_user.is_authenticated:
+        goods_basket = Basket.query.filter_by(user_id=current_user.id).count()
+    else:
+        goods_basket = 0
+    
     if request.method == 'POST':
         print("Form submitted via POST method")
         if 'login' in request.form :
             print("Form LOG")
-            print(request.form)
-
+            print(request.form)     
             if login_form.validate_on_submit():
                 print("Form LOG IN")
                 username = request.form['login-username']
@@ -65,13 +69,32 @@ def base():
                     flash('Congratulations, you are now a registered user!')
                     app.logger.debug(f'User {username} successfully registered')
 
-    return render_template('register.html',goods=goods, login_form=login_form, registration_form=registration_form,comment_form=comment_form, comments=comments)
+    return render_template('register.html',goods=goods, login_form=login_form, registration_form=registration_form,comment_form=comment_form, comments=comments, goods_basket=goods_basket)
 
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('base'))
 
+@app.route('/clear')
+def clear():
+    Basket.query.filter_by(user_id=current_user.id).delete()
+    db.session.commit()
+    return redirect(url_for('indexBasket'))
+
+@app.route('/clearItem/<int:basket_id>')
+def clearItem(basket_id):
+    print("delete items:", basket_id, "\n", Basket.query.filter_by(good_id=basket_id))
+    Basket.query.filter_by(id=basket_id).delete()
+    db.session.commit()
+    return redirect(url_for('indexBasket'))
+
+@app.route('/clearComment/<int:comment_id>')
+def clearComment(comment_id):
+    print("delete items:", comment_id)
+    Comment.query.filter_by(id=comment_id).delete()
+    db.session.commit()
+    return redirect(url_for('base'))
 
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
@@ -93,4 +116,18 @@ def account():
 @app.route('/indexBasket', methods=['GET', 'POST'])
 @login_required
 def indexBasket():
-    return render_template('indexBasket.html', title='Basket')
+    if request.method == 'POST':
+        selected_goods = request.json.get('selectedItems') 
+        for good_id, size in selected_goods.items():
+            user_basket = Basket.query.filter_by(user_id=current_user.id, good_id=int(good_id)).first()
+
+            if user_basket:
+                user_basket.size = int(size)
+            else:
+                user_basket = Basket(user_id=current_user.id, good_id=int(good_id), size=int(size))
+                db.session.add(user_basket)
+
+        db.session.commit()
+
+    goods_in_basket = Basket.query.filter_by(user_id=current_user.id).all()
+    return render_template('indexBasket.html', title='Basket', goods_in_basket=goods_in_basket)

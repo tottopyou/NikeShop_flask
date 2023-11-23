@@ -11,9 +11,9 @@
 </head>
 <body> 
     <div class="video">
-    <video autoplay muted id="myVideo">
-        <source src="{{ url_for('static', filename='Video/video.mp4') }}" type="video/mp4">
-      </video>
+        <video autoplay muted id="myVideo">
+            <source src="{{ url_for('static', filename='Video/video.mp4') }}" type="video/mp4">
+        </video>
     </div>
     <div class="bg">
         <header class="header">
@@ -25,42 +25,50 @@
         <div class="main">
             <div class="delete">
                 <div class="button">
-                    <button class="del"><i class="fa fa-trash"></i></button>
+                    <a class="del" href="{{ url_for('clear') }}"><i class="fa fa-trash"></i></a>
                     <p>Видалити все</p>
                 </div>
             </div>
             <div class="content section_1">
-                <div class="proposition anim-items no-hide-anim">
-                    <div id="fotoChoose" class="foto">
-                    </div>
-                    <div class="about-sneakers">
-                        <div class="close">
-                            <button class="close-button">
-                                <i class="material-icons">close</i>
-                            </button>
+            {% if goods_in_basket %}
+                {% for basket in goods_in_basket %}
+                {% set discounted_price = basket.good.price * (100 - basket.good.discount) / 100 %}
+                {% set rounded_price = ((discounted_price + 5) // 10) * 10 %}
+                    <div class="proposition anim-items no-hide-anim">
+                        <div id="{{ basket.good.Img_id }}" class="foto">
                         </div>
-                        <h1>NIKE AIR VAPORMAX</h1>
-                        <div class="size">
-                            <h3>Розмір : 38</h3>
-                        </div>
-                        <div class="cost">
-                            <div class="count-buy">
-                                <button class="count " id="minus"><i class="fa fa-minus"></i></button>
-                                <span class="plus-minus">1</span>
-                                <button class="count" id="plus"><i class="fa fa-plus"></i></button>
+                        <div class="about-sneakers">
+                            <div class="close">
+                                <a class="close-button" href="{{ url_for('clearItem', basket_id=basket.id) }}">
+                                    <i class="material-icons">close</i>
+                                </a>
                             </div>
-                            <div class="cost-value">
-                                <div class="discount">-23%</div>
-                                <p class="f_cost">3500 ₴</p>
-                                <p class="r_cost">2699 ₴</p>
+                            <h1>{{ basket.good.name }}</h1>
+                            <div class="size">
+                                <h3>Розмір : {{ basket.size }}</h3>
+                            </div>
+                            <div class="cost">
+                                <div class="count-buy">
+                                    <button class="count minus"  data-item="{{ basket.good_id }}"><i class="fa fa-minus" style="pointer-events: none; cursor: default;" ></i></button>
+                                    <span class="plus-minus" data-item-count="{{ basket.good_id }}">1</span>
+                                    <button class="count plus"  data-item="{{ basket.good_id }}"><i class="fa fa-plus" style="pointer-events: none; cursor: default;" ></i></button>
+                                </div>
+                                <div class="cost-value">
+                                    <div class="discount">-{{ basket.good.discount}}%</div>
+                                    <p class="f_cost">{{ basket.good.price }} ₴</p>
+                                    <p class="r_cost">{{rounded_price|int}} ₴</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    {% endfor %}
+                {% else %}
+                    <H1 style="color: white;">You didn't choose shoes</H1>
+                {% endif %}
             </div>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='JS/loading.js') }}"></script>
-    <script src="{{ url_for('static', filename='JS/plus-minus.js') }}"></script>
+<script src="{{ url_for('static', filename='JS/loading.js') }}"></script>
+<script src="{{ url_for('static', filename='JS/plus-minus.js') }}"></script>
 </body>
 </html>

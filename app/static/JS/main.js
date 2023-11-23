@@ -33,6 +33,9 @@ if(menuLinks.length>0)
         }
 }
 
+function alert_buy (){
+    alert("If you wanna add goods to the basket, you should be authorized");
+}
 
 if(iconMenu)
 {
@@ -42,3 +45,43 @@ if(iconMenu)
         menuBody.classList.toggle('_active');
     });
 }
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const buyButtons = document.querySelectorAll('.buy');
+    let selectedItems = {};
+
+    buyButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            const goodId = button.getAttribute('id');
+            const selectedSize = button.parentElement.querySelector('select').value;
+
+            console.log(goodId);
+            console.log(selectedSize);
+
+            selectedItems[goodId] = selectedSize;
+            console.log(selectedItems);
+
+            localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+        });
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {   
+    window.addEventListener('beforeunload', () => {
+        const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || {};
+        fetch('/indexBasket', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ selectedItems: selectedItems }),
+        })
+        .then(response => response.text())
+        .then(data => {console.log(localStorage), localStorage.clear();})
+        .catch(error => console.error('Error:', error));
+    });
+});

@@ -24,7 +24,7 @@
             <div class="light">
                 <input type="password" name="register-password" placeholder="Password" id="pass_2" class="f_pass" required>
                 <div id="light-img_2" class="light-img"></div>
-                <div id="light-yellow_2" class="light-yellow"></div>
+                <div id="light-yellow_2" class="light-yellow" style="pointer-events: none; cursor: default;"></div>
             </div>
             {% for error in registration_form.password.errors %}
             <span style="color: red;">{{ error }}</span>
