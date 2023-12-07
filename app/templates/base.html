@@ -21,6 +21,7 @@
 </head>
 <body>
     <div class="bg">
+        
         {% block login %}{% endblock %}
         <div class="main">
             <header class="header__burger"> 
@@ -38,11 +39,11 @@
                                 <p><a href="/account" class="menu__link"></a></p>
                                 {% else %}
                                 <p><a href="/account" class="menu__link">Profile</a></p> 
-                                {% endif %}
-                               
+                                {% endif %}                   
                             </div>
                         </nav>
                     </div>
+                    <p onclick="showsearchmenu()" class="button-search"><i class="fa fa-search" style="font-size:24px;color:#fcfefe" ></i></p>
                     {% if current_user.is_anonymous %}
                         <button class="Log-in">Log in</button>
                     {% else %}
@@ -71,6 +72,23 @@
                         </div>
                     </a>
                     {% endif %}     
+                </div>
+                <div class="search_container">
+                    <div class="search">
+                        <div class="search_input">
+                            <i class="fa fa-search" style="font-size:20px;color:#fcfefe"></i>
+                            <input type="text" name="search" id="search" placeholder="Search NikeShop.com">
+                        </div>
+                    </div>
+                    <div class="result_search">
+                        <p style="color: #fcfefe;font-size:20px">Result of searching : </p>
+                        <ul>
+                            <h3 class="not_found" style="color: #fcfefe;"></h3>
+                            {% for good in goods %}
+                            <li class="li_{{good.Img_id}}"><a data-goto="#{{good.Img_id}}" href="" class="menu__link" >{{good.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </header>
             <div class="header ">
@@ -214,7 +232,7 @@
                             </div>
                             {% if comment.user_id == current_user.id %}
                                 <a class="close-button" href="{{ url_for('clearComment' , comment_id=comment.id) }}" style="margin: 10px;">
-                                    <i class="material-icons" style="color: white;">close</i>
+                                    <i class="material-icons" style="color: #fcfefe;">close</i>
                                 </a>
                             {% endif %}
                         </div>
@@ -262,6 +280,14 @@
             </div>
         </div>
     </div> 
+    {% block content %}{% endblock %}
+    <script>
+        var goodsData = [
+            '{% for good in goods %}',
+                { name: "{{ good.name }}", img_id: '{{ good.Img_id }}' },
+            '{% endfor %}'
+        ];
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script id="auth-status" data-is-authenticated="{{ current_user.is_authenticated|lower }}"></script>
     <script src="{{ url_for('static', filename='JS/scroll.js') }}"></script>

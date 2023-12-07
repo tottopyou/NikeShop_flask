@@ -1,8 +1,10 @@
 from app import app, db
-from app.forms import LoginForm, RegistrationForm,EditProfileForm,CommentForm
+import time
+from app.forms import LoginForm, RegistrationForm,EditProfileForm,CommentForm,ResetPasswordRequestForm,ResetPasswordForm
 from flask import jsonify, render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Comment,Good,Basket
+from app.email import send_password_reset_email
 
 @app.route('/', methods=['GET', 'POST'])
 def none():
@@ -15,6 +17,7 @@ def base():
     login_form = LoginForm()
     registration_form = RegistrationForm()
     comment_form = CommentForm()
+    reset_form = ResetPasswordRequestForm()
     comments = []
     comments = Comment.query.order_by(Comment.timestamp.desc()).all()
     goods = Good.query.all()
@@ -46,6 +49,15 @@ def base():
                 comment = Comment(content=request.form['comment_field'], user_id = current_user.id )  
                 db.session.add(comment)
                 db.session.commit()
+        elif 'reset_password' in request.form:
+            if reset_form.validate_on_submit():
+                print("start reset")
+                user = User.query.filter_by(email=request.form['reset-email']).first()
+                if user:
+                    send_password_reset_email(user)
+                flash('Check your email for the instructions to reset your password')
+                time.sleep(0)
+            return redirect(url_for('base'))
 
         elif 'register' in request.form:
             print("Form REG")
@@ -69,7 +81,7 @@ def base():
                     flash('Congratulations, you are now a registered user!')
                     app.logger.debug(f'User {username} successfully registered')
 
-    return render_template('register.html',goods=goods, login_form=login_form, registration_form=registration_form,comment_form=comment_form, comments=comments, goods_basket=goods_basket)
+    return render_template('register.html',goods=goods, login_form=login_form, registration_form=registration_form,comment_form=comment_form, comments=comments, goods_basket=goods_basket, reset_form=reset_form)
 
 @app.route('/logout')
 def logout():
@@ -131,3 +143,18 @@ def indexBasket():
 
     goods_in_basket = Basket.query.filter_by(user_id=current_user.id).all()
     return render_template('indexBasket.html', title='Basket', goods_in_basket=goods_in_basket)
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('base'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('base'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('Your password has been reset.')
+        return redirect(url_for('base'))
+    return render_template('reset_password.html', form=form)    

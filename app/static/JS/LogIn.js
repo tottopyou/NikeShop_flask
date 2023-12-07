@@ -9,7 +9,7 @@ close_button.addEventListener("click",close)
 
 function log_menu (){
     document.querySelector(".Log_in").style.display = 'flex';
-    var divs = document.querySelectorAll(".main div");
+    var divs = document.querySelectorAll(".main div:not(.search):not(.result_search)");
     setTimeout(() => {
         for (var i = 0; i < divs.length; i++){
             
@@ -24,7 +24,7 @@ function log_menu (){
 
 function close (){
     document.querySelector(".Log_in").style.animationPlayState = '';
-    var divs = document.querySelectorAll(".main div");
+    var divs = document.querySelectorAll(".main div:not(.search):not(.result_search)");
     setTimeout(() => {
         for (var i = 0; i < divs.length; i++){
             
@@ -38,20 +38,20 @@ function close (){
 
 
 
-const aboba = document.querySelector('.create');
-aboba.addEventListener('click', create_acc);
+const change_create = document.querySelector('.create');
+change_create.addEventListener('click', create_acc);
 
 var i=1;
 
 function create_acc (){
     
     if(i==1)
-    {
-        
+    {  
         document.querySelector("#log").style.display = 'none';
         document.querySelector("#reg").style.display = 'flex';
         let ac = document.querySelector('.acc_acc');
-        let cr = document.querySelector('.create')
+        let cr = document.querySelector('.create');
+        change_reset.style.display = 'none'
         ac.innerHTML = 'Already have an account?' ;
         cr.innerHTML = 'Log In';
         i++;
@@ -62,12 +62,42 @@ function create_acc (){
         document.querySelector("#reg").style.display = 'none';
         let ac = document.querySelector('.acc_acc');
         let cr = document.querySelector('.create')
+        change_reset.style.display = 'flex'
         ac.innerHTML = 'No account? ' ;
         cr.innerHTML = 'Create one';
         i--;
     }
+}
 
-   
+const change_reset = document.querySelector('.reset_pass');
+change_reset.addEventListener('click', reset_pass);
+
+var j=1;
+
+function reset_pass (){
+    
+    if(j==1)
+    {  
+        document.querySelector("#log").style.display = 'none';
+        document.querySelector("#reset").style.display = 'flex';
+        let ac = document.querySelector('.acc_acc');
+        let cr = document.querySelector('.create')
+        change_reset.innerHTML = 'Cancel' 
+        ac.innerHTML = '' ;
+        cr.innerHTML = '';
+        j++;
+    }
+    else
+    {   
+        document.querySelector("#log").style.display = 'flex';
+        document.querySelector("#reset").style.display = 'none';
+        let ac = document.querySelector('.acc_acc');
+        let cr = document.querySelector('.create')
+        change_reset.innerHTML = 'Reset password' 
+        ac.innerHTML = 'No account? ' ;
+        cr.innerHTML = 'Create one';
+        j--;
+    }
 }
 
 

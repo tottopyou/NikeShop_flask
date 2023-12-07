@@ -17,4 +17,7 @@ app.logger.addHandler(file_handler)
 app.logger.setLevel(logging.DEBUG)
 mail = Mail(app)
 
+with app.app_context():
+    mail.connect()
+
 from app import routes, models

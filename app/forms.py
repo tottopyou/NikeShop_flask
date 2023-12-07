@@ -31,3 +31,10 @@ class EditProfileForm(FlaskForm):
 
 class CommentForm(FlaskForm):
     content = TextAreaField('Comment', validators=[DataRequired()], name= "comment_field")
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()], name="reset-email")
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])  

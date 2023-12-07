@@ -485,6 +485,7 @@
   background-color: #141618;
   font-size: 24px;
   text-decoration: none;
+  margin: auto;
 }
 
 .Log-in:hover {
@@ -492,7 +493,7 @@
 }
 
 .Log_in {
-  width: 700px;
+  width: 600px;
   height: 70%;
   background-color: #fcfefe;
   z-index: 20;
@@ -510,26 +511,31 @@
 @media (max-height: 600px) {
   .Log_in {
     height: 80%;
+    gap: 14px;
   }
 }
 @media (max-height: 600px) {
   .Log_in {
     height: 80%;
+    gap: 12px;
   }
 }
 @media (max-width: 900px) {
   .Log_in {
     width: 70%;
+    gap: 10px;
   }
 }
 @media (max-width: 750px) {
   .Log_in {
     width: 80%;
+    gap: 5px;
   }
 }
 @media (max-width: 600px) {
   .Log_in {
     width: 90%;
+    gap: 0px;
   }
 }
 @keyframes log {
@@ -565,7 +571,11 @@
 .Log_in #reg {
   display: none;
 }
-.Log_in .input-place, .Log_in .light {
+.Log_in #reset {
+  display: none;
+}
+.Log_in .input-place,
+.Log_in .light {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -576,16 +586,19 @@
   opacity: 1;
 }
 @media (max-height: 600px) {
-  .Log_in .input-place, .Log_in .light {
+  .Log_in .input-place,
+  .Log_in .light {
     gap: 12px;
   }
 }
-.Log_in .input-place p, .Log_in .light p {
+.Log_in .input-place p,
+.Log_in .light p {
   color: #141618;
   font-size: 24px;
   margin: 0px;
 }
-.Log_in .input-place .google, .Log_in .light .google {
+.Log_in .input-place .google,
+.Log_in .light .google {
   width: 50%;
   height: 50px;
   border: 4px solid #141618;
@@ -596,24 +609,29 @@
   transition-duration: 0.2s;
 }
 @media (max-width: 900px) {
-  .Log_in .input-place .google, .Log_in .light .google {
+  .Log_in .input-place .google,
+  .Log_in .light .google {
     width: 70%;
   }
 }
 @media (max-width: 750px) {
-  .Log_in .input-place .google, .Log_in .light .google {
+  .Log_in .input-place .google,
+  .Log_in .light .google {
     width: 80%;
   }
 }
 @media (max-width: 600px) {
-  .Log_in .input-place .google, .Log_in .light .google {
+  .Log_in .input-place .google,
+  .Log_in .light .google {
     width: 90%;
   }
 }
-.Log_in .input-place .google:hover, .Log_in .light .google:hover {
+.Log_in .input-place .google:hover,
+.Log_in .light .google:hover {
   transform: translate(0px, -5px);
 }
-.Log_in .input-place input, .Log_in .light input {
+.Log_in .input-place input,
+.Log_in .light input {
   width: 50%;
   height: 50px;
   border: none;
@@ -628,24 +646,29 @@
   padding: 12px 20px;
 }
 @media (max-width: 900px) {
-  .Log_in .input-place input, .Log_in .light input {
+  .Log_in .input-place input,
+  .Log_in .light input {
     width: 70%;
   }
 }
 @media (max-width: 750px) {
-  .Log_in .input-place input, .Log_in .light input {
+  .Log_in .input-place input,
+  .Log_in .light input {
     width: 80%;
   }
 }
 @media (max-width: 600px) {
-  .Log_in .input-place input, .Log_in .light input {
+  .Log_in .input-place input,
+  .Log_in .light input {
     width: 90%;
   }
 }
-.Log_in .input-place input:focus, .Log_in .light input:focus {
+.Log_in .input-place input:focus,
+.Log_in .light input:focus {
   border: 4px solid #9c051e;
 }
-.Log_in .input-place .LogIn_button, .Log_in .light .LogIn_button {
+.Log_in .input-place .LogIn_button,
+.Log_in .light .LogIn_button {
   width: 50%;
   height: 50px;
   border-radius: 8px;
@@ -656,27 +679,45 @@
   margin-top: 5px;
 }
 @media (max-width: 900px) {
-  .Log_in .input-place .LogIn_button, .Log_in .light .LogIn_button {
+  .Log_in .input-place .LogIn_button,
+  .Log_in .light .LogIn_button {
     width: 70%;
   }
 }
 @media (max-width: 750px) {
-  .Log_in .input-place .LogIn_button, .Log_in .light .LogIn_button {
+  .Log_in .input-place .LogIn_button,
+  .Log_in .light .LogIn_button {
     width: 80%;
   }
 }
 @media (max-width: 600px) {
-  .Log_in .input-place .LogIn_button, .Log_in .light .LogIn_button {
+  .Log_in .input-place .LogIn_button,
+  .Log_in .light .LogIn_button {
     width: 90%;
   }
 }
-.Log_in .input-place .LogIn_button:hover, .Log_in .light .LogIn_button:hover {
+.Log_in .input-place .LogIn_button:hover,
+.Log_in .light .LogIn_button:hover {
   transform: translate(0px, -5px);
+}
+.Log_in .reset_pass {
+  color: #9c051e;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.Log_in .reset_pass:hover {
+  text-decoration: underline;
 }
 .Log_in .acc {
   color: #141618;
-  margin: 10px;
   font-size: 24px;
+}
+@media (max-width: 600px) {
+  .Log_in .acc {
+    margin: 10px;
+  }
 }
 .Log_in .acc .create {
   margin-left: 2px;

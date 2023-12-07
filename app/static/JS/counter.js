@@ -2,7 +2,6 @@
 function count() {
     let counterElement = document.querySelector(".num-st");
     let counter = parseInt(counterElement.textContent);
-    console.log(counter)
     counter++;
     counterElement.textContent = counter;
 }

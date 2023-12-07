@@ -40,10 +40,10 @@
             {% for error in login_form.password.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
-
-
         </form>
+        {% include 'resetPassword.html' %}
         {% block register %}{% endblock %}
+        <div class="reset_pass">Reset password</div>
         <div class="input-place" style="margin: 0px 0px auto 0px;">
             <div class="acc">
                 <span class="acc_acc">
