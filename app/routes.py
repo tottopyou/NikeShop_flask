@@ -121,7 +121,11 @@ def account():
         current_user.email = request.form['changed_email']
         db.session.commit()
         return redirect(url_for('account'))
-
+    elif 'change_pass' in request.form:
+        user = User.query.filter_by(email=current_user.email).first()
+        if user:
+            send_password_reset_email(user)
+        return redirect(url_for('account'))
     return render_template('account.html', title='acc', change_form=change_form)
 
 
@@ -146,15 +150,18 @@ def indexBasket():
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    if current_user.is_authenticated:
-        return redirect(url_for('base'))
+    print("we are here")
     user = User.verify_reset_password_token(token)
     if not user:
+        print("second")
         return redirect(url_for('base'))
-    form = ResetPasswordForm()
-    if form.validate_on_submit():
-        user.set_password(form.password.data)
-        db.session.commit()
-        flash('Your password has been reset.')
-        return redirect(url_for('base'))
-    return render_template('reset_password.html', form=form)    
+    form_resetpass = ResetPasswordForm()
+    if 'reset_password' in request.form:
+        if form_resetpass.validate_on_submit():
+            print("third")
+            user.set_password(request.form['Reset_pass_1'])
+            db.session.commit()
+            flash('Your password has been reset.')
+            return redirect(url_for('base'))
+        print("render")
+    return render_template('reset_password.html', form_resetpass=form_resetpass)    

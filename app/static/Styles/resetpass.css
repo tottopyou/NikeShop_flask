@@ -1,0 +1,50 @@
+body {
+  background: #141618;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+}
+body h1 {
+  color: #fcfefe;
+  font-size: 24px;
+}
+body form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+body form input {
+  border: none;
+  border: 4px solid #fcfefe;
+  border-radius: 8px;
+  color: #fcfefe;
+  background-color: #141618;
+  font-weight: 600;
+  padding: 0px;
+  line-height: normal;
+  outline: none;
+  padding: 12px 20px;
+  background: #fcfefe;
+  color: #141618;
+}
+body form input:focus {
+  border: 4px solid #9c051e;
+}
+body form button {
+  border-radius: 8px;
+  color: #141618;
+  background-color: #fcfefe;
+  font-weight: 600;
+  transition-duration: 0.2s;
+  margin-top: 5px;
+  height: 45px;
+  font-size: 16px;
+}
+body form button:hover {
+  transform: translate(0px, -5px);
+}/*# sourceMappingURL=resetpass.css.map */

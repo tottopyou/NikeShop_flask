@@ -6,11 +6,7 @@ from threading import Thread
 import smtplib 
 
 def send_email(subject, sender, recipients, text_body, html_body):
-    print('popka')
-    print("before msg:     " , subject, "\n", sender, "\n", recipients)
     msg = Message(subject, sender=sender, recipients=recipients)
-    print(msg)
-    print('jebaaa')
     msg.body = text_body
     msg.html = html_body
     Thread(target=send_async_email, args=(app, msg)).start()
