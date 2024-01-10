@@ -1,4 +1,4 @@
-from app import app, db
+from app import app, db, oauth
 import time
 from app.forms import LoginForm, RegistrationForm,EditProfileForm,CommentForm,ResetPasswordRequestForm,ResetPasswordForm
 from flask import jsonify, render_template, flash, redirect, url_for, request
@@ -165,3 +165,37 @@ def reset_password(token):
             return redirect(url_for('base'))
         print("render")
     return render_template('reset_password.html', form_resetpass=form_resetpass)    
+
+
+@app.route('/login')
+def login():
+    google = oauth.create_client('google')
+    redirect_uri = url_for('authorize', _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+
+@app.route('/authorize')
+def authorize():
+    google = oauth.create_client('google')
+    token = google.authorize_access_token() 
+    resp = google.get('userinfo')
+    user_info = resp.json()
+    username = user_info.get('name')
+    useremail = user_info.get('email')
+    password = "user authorized by google"
+    user = User(username=username, email=useremail)
+    user.set_password(password)
+    db.session.add(user)
+    try:
+        print("tryyyy")
+        db.session.commit()
+        login_user(user)
+    except Exception as e:
+        db.session.rollback()
+        flash(f"An error occurred during registration: {str(e)}")
+        app.logger.error(f'Error during registration for username: {username}, error: {str(e)}')
+    else:
+        flash('Congratulations, you are now a registered user!')
+        app.logger.debug(f'User {username} successfully registered')
+
+    return redirect('/')

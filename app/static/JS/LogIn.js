@@ -18,7 +18,6 @@ function log_menu (){
         }
         },500);
     setTimeout(() => {document.querySelector(".Log_in").style.animationPlayState = 'paused';},1000);
-
 }
 
 
