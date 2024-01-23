@@ -3168,3 +3168,24 @@ authlib.integrations.base_client.errors.MissingTokenError: missing_token:
 [SQL: INSERT INTO user (username, email, password_hash) VALUES (?, ?, ?)]
 [parameters: ('RUBUS', 'rgrabovsky2006@gmail.com', 'scrypt:32768:8:1$84X28hh8kY9qIyJN$08f5b52b97e16b7fbac62365c5fcaec3cae9798aef269e9177b149b3e6e69b838a7e6434bd66d1d6d069950d3e5d500e2585e93e6a328ebee97fee35e9fa7011')]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-01-14 22:15:13,372 [ERROR] Error during registration for username: RUBUS, error: (sqlite3.IntegrityError) UNIQUE constraint failed: user.email
+[SQL: INSERT INTO user (username, email, password_hash) VALUES (?, ?, ?)]
+[parameters: ('RUBUS', 'rgrabovsky2006@gmail.com', 'scrypt:32768:8:1$KaN53ciq2XQ8x0tz$cd5be869c746ea3641093596e27829164f19a05dbd2d793cfee93b41767a60f80c74f646b1ce0850d82ffc48e000e11bb40a683161df89f1d1f424a03ed943fc')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-01-14 22:16:24,669 [ERROR] Error during registration for username: RUBUS, error: (sqlite3.IntegrityError) UNIQUE constraint failed: user.email
+[SQL: INSERT INTO user (username, email, password_hash) VALUES (?, ?, ?)]
+[parameters: ('RUBUS', 'rgrabovsky2006@gmail.com', 'scrypt:32768:8:1$Jbp7GbMThKDLRmQk$2ea20646f49b56f5f88c8c944b5f179eaace5193bc492606a3ec67db2d4db4ce59de0c13f8794609d1b0c68f6d97c1f9c4ab18b85393f8e89235df4cdb8233f4')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-01-22 11:15:07,695 [ERROR] Error during registration for username: RUBUS, error: (sqlite3.IntegrityError) UNIQUE constraint failed: user.email
+[SQL: INSERT INTO user (username, email, password_hash) VALUES (?, ?, ?)]
+[parameters: ('RUBUS', 'rgrabovsky2006@gmail.com', 'scrypt:32768:8:1$WGBMq31Hhg1FM0R9$3dc5efc9e0c99eb4d426b8d58cb0ea185dc83ee2895a52127e668fda1ef2f979945bc72a80298407e399277b71797f961e65a7ba4751575251c96327ed3888ae')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-01-22 11:56:52,213 [DEBUG] User Roman Hrabovskyi successfully registered
+2024-01-23 17:09:26,741 [ERROR] Error during registration for username: Roman Hrabovskyi, error: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username
+[SQL: INSERT INTO user (username, email, password_hash) VALUES (?, ?, ?)]
+[parameters: ('Roman Hrabovskyi', 'roman.hrabovskyi@student.wab.edu.pl', 'scrypt:32768:8:1$jcRVhaEivRdrbIdH$7c8132de8dc8558b284be7cf21d229f5fbce1fa829637347fd5ded81f673d11bc55fea2f1f337d0976616d86aa6fd2acc97f9abc6a2bfe56ef755da343e608d0')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-01-23 17:09:46,721 [ERROR] Error during registration for username: Roman Hrabovskyi, error: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username
+[SQL: INSERT INTO user (username, email, password_hash) VALUES (?, ?, ?)]
+[parameters: ('Roman Hrabovskyi', 'roman.hrabovskyi@student.wab.edu.pl', 'scrypt:32768:8:1$EKneQeYjK9gvoo71$a7f7ed1ecbefdbf6ea6591690b2700bd03cbaffe2ad681d8f04f9aa2b9e6995a905a5482b1963ac4b0e8f53e773079439c136223040970edb3acf1d1abd1434b')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)

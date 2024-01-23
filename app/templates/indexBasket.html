@@ -19,14 +19,14 @@
         <header class="header">
             <div class="header__container">
                 <a href="/base"><i class="fa fa-home"></i></a>
-                <button class="buy">Оформити замовлення</button>
+                <button class="buy">To order</button>
             </div>
         </header>
         <div class="main">
             <div class="delete">
                 <div class="button">
                     <a class="del" href="{{ url_for('clear') }}"><i class="fa fa-trash"></i></a>
-                    <p>Видалити все</p>
+                    <p>Delete all</p>
                 </div>
             </div>
             <div class="content section_1">
@@ -45,7 +45,7 @@
                             </div>
                             <h1>{{ basket.good.name }}</h1>
                             <div class="size">
-                                <h3>Розмір : {{ basket.size }}</h3>
+                                <h3>Size : {{ basket.size }}</h3>
                             </div>
                             <div class="cost">
                                 <div class="count-buy">

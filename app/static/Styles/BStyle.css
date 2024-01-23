@@ -95,10 +95,12 @@ body {
   border-radius: 15px;
   transition-duration: 0.5s;
   margin: 0px;
+  padding: 5px 60px;
 }
 @media (max-width: 400px) {
   .bg .header .header__container .buy {
     max-width: 190px;
+    padding: 2px 30px;
   }
 }
 .bg .header .header__container .buy:hover {
@@ -451,7 +453,8 @@ body {
 .container .rewrite p {
   margin: 0px;
 }
-.container .rewrite-password, .container .rewrite button {
+.container .rewrite-password,
+.container .rewrite button {
   border-radius: 8px;
   background: none;
   padding: 12px 16px;
@@ -480,6 +483,7 @@ body {
   outline: none;
   padding: 12px 20px;
 }
-.container .rewrite .change_username, .container .rewrite .change_email {
+.container .rewrite .change_username,
+.container .rewrite .change_email {
   display: none;
 }/*# sourceMappingURL=BStyle.css.map */

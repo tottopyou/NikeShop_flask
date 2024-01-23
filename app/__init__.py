@@ -5,6 +5,8 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 import logging
+import os
+from authlib.integrations.flask_client import OAuth
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -16,6 +18,21 @@ file_handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(messa
 app.logger.addHandler(file_handler)
 app.logger.setLevel(logging.DEBUG)
 mail = Mail(app)
+
+oauth = OAuth(app)
+google = oauth.register(
+    name='google',
+    client_id="354944080345-ti09n9mflh184mrn5m246m3kn7nlhvhs.apps.googleusercontent.com",
+    client_secret="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",
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    api_base_url='https://www.googleapis.com/oauth2/v1/',
+    userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',
+    client_kwargs={'scope': 'email profile'},
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration'
+)
 
 with app.app_context():
     mail.connect()

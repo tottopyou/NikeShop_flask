@@ -20,28 +20,28 @@
             {{ change_form.hidden_tag() }}         
             <div class="container">
                 <div class="rewrite">
-                    <p>Ім'я</p>
+                    <p>Name</p>
                     <input type="text" value="{{ current_user.username }}"  name="changed_username" id="name">
                     <button class="change_username" name="change_name">Change username</button>
                 </div>
-                <div class="info">Ім'я, що використовується для перевірки посвідчення особи.</div>
+                <div class="info">Name used for ID verification.</div>
             </div>
             <div class="border"></div>
             <div class="container">
                 <div class="rewrite">
-                    <p>Електронна адреса (Увійти)</p>
+                    <p>Email address (Log in)</p>
                     <input type="text" value="{{ current_user.email }}" name="changed_email" id="email">
                     <button class="change_email" name="change_mail">Change email</button>
                 </div>
-                <div class="info">Ви отримуєте повідомлення за цією адресою.</div>
+                <div class="info">You receive messages at this address.</div>
             </div>
             <div class="border"></div>
             <div class="container">
                 <div class="rewrite">
-                    <p>Пароль</p>
-                    <button class="rewrite-password" name="change_pass">Скинути свій пароль</button>
+                    <p>Password</p>
+                    <button class="rewrite-password" name="change_pass">Reset your password</button>
                 </div>
-                <div class="info">Будь ласка, перегляньте вашу електронну пошту щодо інструкцій з відновлення пароля.</div>
+                <div class="info">Please check your email for password reset instructions.</div>
             </div>
         </form>
     </div>

@@ -32,9 +32,9 @@
                         </div>
                         <nav class="menu__body">
                             <div class="menu__list">
-                                <p><a data-goto=".section_1" href="" class="menu__link" >Наші товари</a></p>
-                                <p><a data-goto=".section_2" href="" class="menu__link" >Відгуки</a></p>    
-                                <p><a data-goto=".section_3" href="" class="menu__link" >Контакти</a></p> 
+                                <p><a data-goto=".section_1" href="" class="menu__link" >Our goods</a></p>
+                                <p><a data-goto=".section_2" href="" class="menu__link" >Reviews</a></p>    
+                                <p><a data-goto=".section_3" href="" class="menu__link" >Contacts</a></p> 
                                 {% if current_user.is_anonymous %}
                                 <p><a href="/account" class="menu__link"></a></p>
                                 {% else %}
@@ -96,11 +96,11 @@
                     <p class="nike-name">NIKE</p>
                 </div>
                 <div class="header-info ">
-                    <p class="head anim-items no-hide-anim">Чому саме ми ?</p>
+                    <p class="head anim-items no-hide-anim">Why us ?</p>
                     <div class="info-text anim-items no-hide-anim">
                         <div class="text">
                             <div class="left">
-                                <p>Відгуки :</p>
+                                <p>Reviews :</p>
                             </div>
                             <div class="right">
                                 <p><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i></p>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="text">
                             <div class="left">
-                                <p>Якість :</p>
+                                <p>Quality :</p>
                             </div>
                             <div class="right">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum vitae optio repellat accusantium error? Ullam!</p>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="text">
                             <div class="left">
-                                <p>Надійний постачальник :</p>
+                                <p>Reliable supplier :</p>
                             </div>
                             <div class="right">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum perspiciatis dolore aspernatur eos qui veniam eveniet atque ad facere rem.</p>
@@ -127,7 +127,7 @@
                 <div class="image"></div>
             </div>
             <div class="name anim-items no-hide-anim">
-                <p>Що ми пропонуємо :</p>
+                <p>What we offer :</p>
             </div>
             <div class="content section_1">
             {% for good in goods %}
@@ -159,9 +159,9 @@
                                 <option value="45">45</option>
                             </select>
                             {% if current_user.is_anonymous %}
-                            <button id="{{ good.id }}" class="buy" onclick="alert_buy()">Купити</button>
+                            <button id="{{ good.id }}" class="buy" onclick="alert_buy()">   Buy   </button>
                             {% else %}
-                            <button id="{{ good.id }}" class="buy">Купити</button>
+                            <button id="{{ good.id }}" class="buy">   Buy   </button>
                             {% endif %}
                         </div>                       
                     </form>
@@ -192,9 +192,9 @@
                                 <option value="45">45</option>
                             </select>
                             {% if current_user.is_anonymous %}
-                            <button id="{{ good.id }}" class="buy" onclick="alert_buy()">Купити</button>
+                            <button id="{{ good.id }}" class="buy" onclick="alert_buy()">   Buy   </button>
                             {% else %}
-                            <button id="{{ good.id }}" class="buy">Купити</button>
+                            <button id="{{ good.id }}" class="buy">   Buy   </button>
                             {% endif %}
                         </div>
                     </form>
@@ -273,7 +273,7 @@
                     </div>
                 </div>
                 <div class="social s4">
-                    <h6>Контакти :</h6>
+                    <h6>Contacts :</h6>
                         <p>+380 (989)20-68-45</p>
                         <p>+380 (989)58-72-36</p>
                 </div>
