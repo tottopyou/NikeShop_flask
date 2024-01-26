@@ -1,10 +1,9 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from app import db, login
+from app import db, login, app
 from flask_login import UserMixin
 from time import time
 import jwt
-from app import app
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

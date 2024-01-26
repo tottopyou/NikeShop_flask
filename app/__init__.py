@@ -9,6 +9,11 @@ import os
 from app.routes import routes_line
 from authlib.integrations.flask_client import OAuth
 
+db = SQLAlchemy()
+migrate = Migrate()
+login = LoginManager()
+mail = Mail()
+oauth = OAuth()
 
 def create_app():
     app = Flask(__name__)
