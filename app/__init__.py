@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 import logging
 import os
+from routes import routes_line
 from authlib.integrations.flask_client import OAuth
 
 
@@ -39,6 +40,6 @@ def create_app():
     with app.app_context():
         mail.connect()
     
-    return app
+    routes_line(app, db, oauth)
 
-from app import routes, models
+    return app
