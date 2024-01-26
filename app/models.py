@@ -1,9 +1,18 @@
 from datetime import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
-from app import db, login, app
-from flask_login import UserMixin
 from time import time
+
 import jwt
+from flask import current_app
+from flask_login import LoginManager, UserMixin
+from flask_mail import Mail
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import check_password_hash, generate_password_hash
+
+db = SQLAlchemy()
+migrate = Migrate()
+login = LoginManager()
+mail = Mail()
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -14,12 +23,12 @@ class User(UserMixin, db.Model):
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
-            app.config['SECRET_KEY'], algorithm='HS256')
+            current_app.config['SECRET_KEY'], algorithm='HS256')
 
     @staticmethod
     def verify_reset_password_token(token):
         try:
-            id = jwt.decode(token, app.config['SECRET_KEY'],
+            id = jwt.decode(token, current_app.config['SECRET_KEY'],
                             algorithms=['HS256'])['reset_password']
         except:
             return
@@ -65,3 +74,5 @@ class Basket(db.Model):
     size = db.Column(db.Integer, nullable=False)
     user = db.relationship('User', backref='baskets')
     good = db.relationship('Good', backref='baskets')
+
+from app import models

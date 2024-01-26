@@ -1,31 +1,31 @@
-from flask import Flask
-from config import Config
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_login import LoginManager
-from flask_mail import Mail
 import logging
 import os
-from app.routes import routes_line
-from authlib.integrations.flask_client import OAuth
 
-db = SQLAlchemy()
-migrate = Migrate()
-login = LoginManager()
-mail = Mail()
-oauth = OAuth()
+from authlib.integrations.flask_client import OAuth
+from flask import Flask
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+
+from config import Config
+
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    db = SQLAlchemy(app)
+    from app.models import db
+    db.init_app(app)
     migrate = Migrate(app, db)
-    login = LoginManager(app)
+
+    from app.models import login
+    login.init_app(app)
+
+    from app.email import mail 
+    mail.init_app(app)
+
     file_handler = logging.FileHandler('app.log')
     file_handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(message)s'))
     app.logger.addHandler(file_handler)
     app.logger.setLevel(logging.DEBUG)
-    mail = Mail(app)
 
     oauth = OAuth(app)
     google = oauth.register(
@@ -44,7 +44,11 @@ def create_app():
 
     with app.app_context():
         mail.connect()
-    
+
+    from app.routes import routes_line  # Import routes_line after initializing mail
+
     routes_line(app, db, oauth)
 
     return app
+
+from app import models

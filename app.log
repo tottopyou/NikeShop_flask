@@ -3189,3 +3189,38 @@ authlib.integrations.base_client.errors.MissingTokenError: missing_token:
 [SQL: INSERT INTO user (username, email, password_hash) VALUES (?, ?, ?)]
 [parameters: ('Roman Hrabovskyi', 'roman.hrabovskyi@student.wab.edu.pl', 'scrypt:32768:8:1$EKneQeYjK9gvoo71$a7f7ed1ecbefdbf6ea6591690b2700bd03cbaffe2ad681d8f04f9aa2b9e6995a905a5482b1963ac4b0e8f53e773079439c136223040970edb3acf1d1abd1434b')]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-01-26 19:02:17,469 [ERROR] Exception on /base [GET]
+Traceback (most recent call last):
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Works\NIke_Shop_Flask\app\routes.py", line 23, in base
+    comments = Comment.query.order_by(Comment.timestamp.desc()).all()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\query.py", line 2693, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\session.py", line 2306, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\session.py", line 2176, in _execute_internal
+    bind = self.get_bind(**bind_arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_sqlalchemy\session.py", line 53, in get_bind
+    engines = self._db.engines
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_sqlalchemy\extension.py", line 690, in engines
+    raise RuntimeError(
+RuntimeError: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
