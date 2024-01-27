@@ -31,7 +31,7 @@ def create_app():
     google = oauth.register(
         name='google',
         client_id="354944080345-ti09n9mflh184mrn5m246m3kn7nlhvhs.apps.googleusercontent.com",
-        client_secret="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",
+        client_secret=os.environ['client_secret'],
         access_token_url='https://accounts.google.com/o/oauth2/token',
         access_token_params=None,
         authorize_url='https://accounts.google.com/o/oauth2/auth',
