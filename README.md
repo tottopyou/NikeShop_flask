@@ -6,4 +6,4 @@ Some sections of the site are blocked, such as the ability to write comments or 
 
 The website also features a search system for goods.
 
-There are many features based on JS in the front end as well, but I recommend that you explore them for yourself here: __.__
+There are many features based on JS in the front end as well, but I recommend that you explore them for yourself here: __https://nike-shop-fc325e1ea072.herokuapp.com/base__
