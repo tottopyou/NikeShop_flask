@@ -181,22 +181,24 @@ def routes_line(app, db, oauth):
         token = google.authorize_access_token() 
         resp = google.get('userinfo')
         user_info = resp.json()
-        username = user_info.get('name')
         useremail = user_info.get('email')
-        password = "user authorized by google"
-        user = User(username=username, email=useremail)
-        user.set_password(password)
-        db.session.add(user)
-        try:
-            print("tryyyy")
-            db.session.commit()
+        user = User.query.filter_by(email=useremail).first()
+        if user:
             login_user(user)
-        except Exception as e:
-            db.session.rollback()
-            flash(f"An error occurred during registration: {str(e)}")
-            app.logger.error(f'Error during registration for username: {username}, error: {str(e)}')
+            flash('Welcome back!')
         else:
-            flash('Congratulations, you are now a registered user!')
-            app.logger.debug(f'User {username} successfully registered')
+            username = user_info.get('name')
+            password = "user authorized by google"
+            user = User(username=username, email=useremail)
+            user.set_password(password)
+            db.session.add(user)
+            try:
+                db.session.commit()
+                login_user(user)
+                flash('Congratulations, you are now a registered user!')
+            except Exception as e:
+                db.session.rollback()
+                flash(f"An error occurred during registration: {str(e)}")
+                app.logger.error(f'Error during registration for username: {username}, error: {str(e)}')
 
         return redirect('/')

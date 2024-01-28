@@ -9,12 +9,13 @@ close_button.addEventListener("click",close)
 
 function log_menu (){
     document.querySelector(".Log_in").style.display = 'flex';
-    var divs = document.querySelectorAll(".main div:not(.search):not(.result_search)");
+    var divs = document.querySelectorAll(".main div:not(.search):not(.search_container):not(.result_search):not(.header__menu):not(.menu__icon):not(.menu__list)"); 
     setTimeout(() => {
         for (var i = 0; i < divs.length; i++){
             
             divs[i].style.filter = "blur(3px)";
             divs[i].style.opacity= 0.8;
+            divs[i].style.pointerEvents = "none";
         }
         },500);
     setTimeout(() => {document.querySelector(".Log_in").style.animationPlayState = 'paused';},1000);
@@ -23,12 +24,13 @@ function log_menu (){
 
 function close (){
     document.querySelector(".Log_in").style.animationPlayState = '';
-    var divs = document.querySelectorAll(".main div:not(.search):not(.result_search)");
+    var divs = document.querySelectorAll(".main div:not(.search):not(.search_container):not(.result_search):not(.header__menu):not(.menu__icon):not(.menu__list)");
     setTimeout(() => {
         for (var i = 0; i < divs.length; i++){
             
             divs[i].style.filter = "blur(0px)";
             divs[i].style.opacity= 1;
+            divs[i].style.pointerEvents = "auto";
         }
         },500);
     setTimeout(() => {document.querySelector(".Log_in").style.display = 'none';},1000);
@@ -40,12 +42,12 @@ function close (){
 const change_create = document.querySelector('.create');
 change_create.addEventListener('click', create_acc);
 
-var i=1;
+var i = true;
 
 function create_acc (){
     
-    if(i==1)
-    {  
+    if(i==true)
+    {   
         document.querySelector("#log").style.display = 'none';
         document.querySelector("#reg").style.display = 'flex';
         let ac = document.querySelector('.acc_acc');
@@ -53,7 +55,7 @@ function create_acc (){
         change_reset.style.display = 'none'
         ac.innerHTML = 'Already have an account?' ;
         cr.innerHTML = 'Log In';
-        i++;
+        i = false;
     }
     else
     {   
@@ -64,18 +66,18 @@ function create_acc (){
         change_reset.style.display = 'flex'
         ac.innerHTML = 'No account? ' ;
         cr.innerHTML = 'Create one';
-        i--;
+        i = true;
     }
 }
 
 const change_reset = document.querySelector('.reset_pass');
 change_reset.addEventListener('click', reset_pass);
 
-var j=1;
+var j = true;
 
 function reset_pass (){
     
-    if(j==1)
+    if(j==true)
     {  
         document.querySelector("#log").style.display = 'none';
         document.querySelector("#google_apear").style.display = 'none';
@@ -86,7 +88,7 @@ function reset_pass (){
         change_reset.innerHTML = 'Cancel' 
         ac.innerHTML = '' ;
         cr.innerHTML = '';
-        j++;
+        j = false;
     }
     else
     {   
@@ -99,12 +101,12 @@ function reset_pass (){
         change_reset.innerHTML = 'Reset password' 
         ac.innerHTML = 'No account? ' ;
         cr.innerHTML = 'Create one';
-        j--;
+        j = true;
     }
 }
 
 
-const light_button = document.querySelector('.light-img')
+const light_button = document.querySelector('#light-img_1')
 light_button.addEventListener("click",light)
 
 function light(){
@@ -112,10 +114,10 @@ function light(){
     var x = document.getElementById("pass");
     if (x.type === "password") {
         x.type = "text";
-        document.querySelector(".light-yellow").style.display = 'flex';
+        document.querySelector("#light-yellow_1").style.display = 'flex';
     } else {
         x.type = "password";
-        document.querySelector(".light-yellow").style.display = 'none';
+        document.querySelector("#light-yellow_1").style.display = 'none';
     }
 }
 

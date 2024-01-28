@@ -580,6 +580,7 @@
 .Log_in .google {
   width: 50%;
   height: 50px;
+  min-height: 49.28px;
   border: 4px solid #141618;
   border-radius: 8px;
   color: #141618;

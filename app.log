@@ -3224,3 +3224,5 @@ Traceback (most recent call last):
   File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_sqlalchemy\extension.py", line 690, in engines
     raise RuntimeError(
 RuntimeError: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
+2024-01-28 13:21:59,779 [ERROR] SMTP Server Disconnected: Connection unexpectedly closed
+2024-01-28 13:22:09,882 [ERROR] Error while reconnecting to SMTP server: Connection unexpectedly closed

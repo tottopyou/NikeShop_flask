@@ -19,6 +19,7 @@ if(menuLinks.length>0)
                 
                 if (iconMenu.classList.contains('_active'))
                 {
+                    block_log_menu()
                     iconMenu.classList.remove('_active');
                     menuBody.classList.remove('_active');
                 }
@@ -41,10 +42,37 @@ if(iconMenu)
 {
     iconMenu.addEventListener("click",function(e)
     {
+        block_log_menu()
         iconMenu.classList.toggle('_active');
         menuBody.classList.toggle('_active');
+
     });
 }
+
+
+change_block = true
+
+function block_log_menu(){
+    if (change_block == true){    
+        document.querySelector('.button-search').style.pointerEvents = "none";
+        document.querySelector('.teleport').style.pointerEvents = "none";
+        document.querySelector('.Log-in').style.pointerEvents = "none"
+        document.querySelector('.icon').style.pointerEvents = "none"
+        document.querySelector('.basket').style.pointerEvents = "none"
+        document.querySelector('.search_container').style.pointerEvents = "none"
+        change_block = false
+    }
+    else{
+        document.querySelector('.button-search').style.pointerEvents = "auto";
+        document.querySelector('.teleport').style.pointerEvents = "auto";
+        document.querySelector('.Log-in').style.pointerEvents = "auto"
+        document.querySelector('.icon').style.pointerEvents = "auto"
+        document.querySelector('.basket').style.pointerEvents = "auto"
+        document.querySelector('.search_container').style.pointerEvents = "auto"
+        change_block = true
+    }
+}
+
 
 let input_search = document.querySelector("#search");
 let result_search_area = document.querySelector(".result_search");

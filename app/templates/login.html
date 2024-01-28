@@ -17,8 +17,8 @@
             {% endfor %}
             <div class="light">
                 <input type="password" name="login-password" placeholder="Password" id="pass"  required>
-                <div class="light-img"></div>
-                <div class="light-yellow" style="pointer-events: none; cursor: default;"></div>
+                <div class="light-img" id="light-img_1"></div>
+                <div class="light-yellow" id="light-yellow_1" style="pointer-events: none; cursor: default;"></div>
             </div>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
