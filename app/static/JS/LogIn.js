@@ -78,7 +78,9 @@ function reset_pass (){
     if(j==1)
     {  
         document.querySelector("#log").style.display = 'none';
+        document.querySelector("#google_apear").style.display = 'none';
         document.querySelector("#reset").style.display = 'flex';
+        document.querySelector("#reset").style.margin = "auto 0px 0px 0px";
         let ac = document.querySelector('.acc_acc');
         let cr = document.querySelector('.create')
         change_reset.innerHTML = 'Cancel' 
@@ -89,7 +91,9 @@ function reset_pass (){
     else
     {   
         document.querySelector("#log").style.display = 'flex';
+        document.querySelector("#google_apear").style.display = 'block';
         document.querySelector("#reset").style.display = 'none';
+        document.querySelector("#reset").style.margin = "0px 0px 0px 0px";
         let ac = document.querySelector('.acc_acc');
         let cr = document.querySelector('.create')
         change_reset.innerHTML = 'Reset password' 

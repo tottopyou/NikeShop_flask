@@ -185,5 +185,5 @@ function displayResults(results) {
   }
 
 function authorize_window() {
-    window.open("http://127.0.0.1:5000/login");
+    window.open("https://nike-shop-fc325e1ea072.herokuapp.com/login");
 }
