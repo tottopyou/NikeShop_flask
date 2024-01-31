@@ -39,7 +39,8 @@ def create_app():
         api_base_url='https://www.googleapis.com/oauth2/v1/',
         userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',
         client_kwargs={'scope': 'email profile'},
-        server_metadata_url='https://accounts.google.com/.well-known/openid-configuration'
+        server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+        redirect_uri=os.environ['OAUTH_REDIRECT_URI']
     )
 
     with app.app_context():

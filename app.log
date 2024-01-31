@@ -3226,3 +3226,31 @@ Traceback (most recent call last):
 RuntimeError: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
 2024-01-28 13:21:59,779 [ERROR] SMTP Server Disconnected: Connection unexpectedly closed
 2024-01-28 13:22:09,882 [ERROR] Error while reconnecting to SMTP server: Connection unexpectedly closed
+2024-01-28 21:12:11,565 [ERROR] Exception on /authorize [GET]
+Traceback (most recent call last):
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\authlib\integrations\base_client\registry.py", line 114, in __getattr__
+    return object.__getattribute__(self, key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'OAuth' object has no attribute 'providername'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Works\NIke_Shop_Flask\app\routes.py", line 181, in authorize
+    token = oauth.providername.authorize_access_token()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Roman\AppData\Local\Programs\Python\Python311\Lib\site-packages\authlib\integrations\base_client\registry.py", line 118, in __getattr__
+    raise AttributeError('No such client: %s' % key)
+AttributeError: No such client: providername

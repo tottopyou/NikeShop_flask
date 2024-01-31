@@ -24,6 +24,7 @@ def send_password_reset_email(user):
 
 def send_async_email(app, msg):
     with app.app_context():
+        print("here will be app : ", app, '\n', "here will be msg : ", msg )
         try:
             mail.send(msg)
         except smtplib.SMTPServerDisconnected as e:
